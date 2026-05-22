@@ -1,0 +1,16 @@
+__¿Por qué un sistema de delivery usa Queue para los pedidos pero Stack para la bitácora? ¿Qué problema operativo surgiría si invertimos las estructuras?
+
+R. Bueno, debido a que los pedidos deben entregarse en el menor tiempo posible es mas conveniente atenderlos de forma que el primero en llegar sea el primero en salir, asi hay una justicia en la cola y son atendidos en el orden de llegada, en cambio para la bitacora debe usarse el sistema de pilas, ya que la ultima accion es la primera en poder deshecha, esto crea un flujo de deshacer basado en el historial de acciones, como cada accion lleva a otra en cadena la mejor forma para deshacerla es eslabon por eslabon.
+En cambio deshacer la primera accion del dia crearia incongruencias en el flujo de trabajo, por ejemplo, si la primera accion fue registrar un pedido y la ultima fue entregarlo, al eliminar la primera acción (registro) la ultima (entrega) carece de sentido. Por otra parte tener un sistema de pila para los pedidos podria causar que el primero en pedir espere demasiado (a que sean atendidas todas las solicitudes) para poder ser atendido.
+
+__¿Por qué es obligatorio verificar Count == 0 antes de Dequeue() o Pop()? ¿Qué ocurre en ejecución si se omite esta validación?
+
+R. Ya que el dequeue y el pop son comandos para procesar los elementos de pilas y colas, si estan vacias estaran intentando procesar nada, aunque no he probado personalemte imagino que esto llevaria a un colapso en el programa al ordenarle hacer algo que seria imposible.
+
+__En el método Deshacer, ¿por qué es necesario analizar el texto con .StartsWith() antes de revertir? ¿Qué error de estado evitaría esto?
+
+R. Con esto enviamos la accion al registro presciso que queremos modificar, de lo contrario no identificaria el movimiento a deshacer en la pila.
+
+__¿Qué ventaja tiene entregar mediante Fork + Pull Request en lugar de un archivo comprimido? ¿Cómo facilita la evaluación, la trazabilidad y la retroalimentación?
+
+R. Es una forma mas practica de hacer las entregas de codigo complejo, que tienen varios archivos y elementos, ademas de que nos ayuda a habituarnos al trabajo con Git y el flujo de codigo. Facilita la evaluacion ya que el profesor tiene todos los codigos en su github, puede ver los commit y colaboradores, ademas de que puede hacer comentarios y correcciones en el codigo de sus alumnos.
